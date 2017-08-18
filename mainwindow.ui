@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>810</width>
+    <height>480</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>SerialTerminal</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="0" column="0">
+     <layout class="QVBoxLayout" name="layout">
+      <item>
+       <layout class="QGridLayout" name="topBar">
+        <item row="0" column="6">
+         <widget class="QPushButton" name="connectButton">
+          <property name="text">
+           <string>Connect</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="4">
+         <widget class="QComboBox" name="stopBitsBox"/>
+        </item>
+        <item row="0" column="3">
+         <widget class="QComboBox" name="parityBox"/>
+        </item>
+        <item row="0" column="2">
+         <widget class="QComboBox" name="dataBitsBox"/>
+        </item>
+        <item row="0" column="7">
+         <widget class="QPushButton" name="disconnectButton">
+          <property name="text">
+           <string>Disconnect</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QComboBox" name="serialPortBox"/>
+        </item>
+        <item row="0" column="1">
+         <widget class="QComboBox" name="baudRateBox"/>
+        </item>
+        <item row="0" column="8">
+         <widget class="QPushButton" name="clearConsoleButton">
+          <property name="text">
+           <string>Clear</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="5">
+         <widget class="QComboBox" name="flowControlBox"/>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QTextEdit" name="console">
+        <property name="font">
+         <font>
+          <family>Lucida Sans Unicode</family>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="inputBar">
+        <item>
+         <widget class="QLineEdit" name="input">
+          <property name="font">
+           <font>
+            <family>Lucida Sans Unicode</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="sendButton">
+          <property name="text">
+           <string>Send</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="clearInputButton">
+          <property name="text">
+           <string>Clear</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="x0">
+        <item>
+         <widget class="QPushButton" name="x00">
+          <property name="text">
+           <string>NUL</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="x01">
+          <property name="text">
+           <string>SOH</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="x02">
+          <property name="text">
+           <string>STX</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="x03">
+          <property name="text">
+           <string>ETX</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="x04">
+          <property name="text">
+           <string>EOT</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="x09">
+          <property name="text">
+           <string>TAB</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="x0A">
+          <property name="text">
+           <string>LF</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="x0D">
+          <property name="text">
+           <string>CR</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="x1">
+        <item>
+         <widget class="QPushButton" name="x11">
+          <property name="text">
+           <string>DC1</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="x12">
+          <property name="text">
+           <string>DC2</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="x13">
+          <property name="text">
+           <string>DC3</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="x14">
+          <property name="text">
+           <string>DC4</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="x1C">
+          <property name="text">
+           <string>FS</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="x1D">
+          <property name="text">
+           <string>GS</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="x1E">
+          <property name="text">
+           <string>RS</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="x1F">
+          <property name="text">
+           <string>US</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>
