@@ -26,47 +26,31 @@ MainWindow::MainWindow(QWidget *parent) :
     status = new QLabel;
     ui->statusBar->addWidget(status);
 
-    connect(serial, static_cast<void (QSerialPort::*)(QSerialPort::SerialPortError)>(&QSerialPort::error),
-            this, &MainWindow::handleError);
-    connect(serial, &QSerialPort::readyRead, this, &MainWindow::readData);
+    connect(serial, &QSerialPort::errorOccurred, this, &MainWindow::handleError);
+    connect(serial, &QSerialPort::readyRead,     this, &MainWindow::readData);
 
     connect(ui->connectButton,      SIGNAL (clicked()), this, SLOT (openSerialPort()));
     connect(ui->disconnectButton,   SIGNAL (clicked()), this, SLOT (closeSerialPort()));
     connect(ui->clearConsoleButton, SIGNAL (clicked()), this, SLOT (clearConsole()));
     connect(ui->sendButton,         SIGNAL (clicked()), this, SLOT (writeData()));
     connect(ui->clearInputButton,   SIGNAL (clicked()), this, SLOT (clearInput()));
-    connect(ui->x00,                SIGNAL (clicked()), this, SLOT (insertSpecialChar00()));
-    connect(ui->x01,                SIGNAL (clicked()), this, SLOT (insertSpecialChar01()));
-    connect(ui->x02,                SIGNAL (clicked()), this, SLOT (insertSpecialChar02()));
-    connect(ui->x03,                SIGNAL (clicked()), this, SLOT (insertSpecialChar03()));
-    connect(ui->x04,                SIGNAL (clicked()), this, SLOT (insertSpecialChar04()));
-    // connect(ui->x05,             SIGNAL (clicked()), this, SLOT (insertSpecialChar05()));
-    // connect(ui->x06,             SIGNAL (clicked()), this, SLOT (insertSpecialChar06()));
-    // connect(ui->x07,             SIGNAL (clicked()), this, SLOT (insertSpecialChar07()));
-    // connect(ui->x08,             SIGNAL (clicked()), this, SLOT (insertSpecialChar08()));
-    connect(ui->x09,                SIGNAL (clicked()), this, SLOT (insertSpecialChar09()));
-    connect(ui->x0A,                SIGNAL (clicked()), this, SLOT (insertSpecialChar0A()));
-    // connect(ui->x0B,             SIGNAL (clicked()), this, SLOT (insertSpecialChar0B()));
-    // connect(ui->x0C,             SIGNAL (clicked()), this, SLOT (insertSpecialChar0C()));
-    connect(ui->x0D,                SIGNAL (clicked()), this, SLOT (insertSpecialChar0D()));
-    // connect(ui->x0E,             SIGNAL (clicked()), this, SLOT (insertSpecialChar0E()));
-    // connect(ui->x0F,             SIGNAL (clicked()), this, SLOT (insertSpecialChar0F()));
-    // connect(ui->x10,             SIGNAL (clicked()), this, SLOT (insertSpecialChar10()));
-    connect(ui->x11,                SIGNAL (clicked()), this, SLOT (insertSpecialChar11()));
-    connect(ui->x12,                SIGNAL (clicked()), this, SLOT (insertSpecialChar12()));
-    connect(ui->x13,                SIGNAL (clicked()), this, SLOT (insertSpecialChar13()));
-    connect(ui->x14,                SIGNAL (clicked()), this, SLOT (insertSpecialChar14()));
-    // connect(ui->x15,             SIGNAL (clicked()), this, SLOT (insertSpecialChar15()));
-    // connect(ui->x16,             SIGNAL (clicked()), this, SLOT (insertSpecialChar16()));
-    // connect(ui->x17,             SIGNAL (clicked()), this, SLOT (insertSpecialChar17()));
-    // connect(ui->x18,             SIGNAL (clicked()), this, SLOT (insertSpecialChar18()));
-    // connect(ui->x19,             SIGNAL (clicked()), this, SLOT (insertSpecialChar19()));
-    // connect(ui->x1A,             SIGNAL (clicked()), this, SLOT (insertSpecialChar1A()));
-    // connect(ui->x1B,             SIGNAL (clicked()), this, SLOT (insertSpecialChar1B()));
-    connect(ui->x1C,                SIGNAL (clicked()), this, SLOT (insertSpecialChar1C()));
-    connect(ui->x1D,                SIGNAL (clicked()), this, SLOT (insertSpecialChar1D()));
-    connect(ui->x1E,                SIGNAL (clicked()), this, SLOT (insertSpecialChar1E()));
-    connect(ui->x1F,                SIGNAL (clicked()), this, SLOT (insertSpecialChar1F()));
+
+    connect(ui->x00, SIGNAL (clicked()), this, SLOT (insertSpecialChar00()));
+    connect(ui->x01, SIGNAL (clicked()), this, SLOT (insertSpecialChar01()));
+    connect(ui->x02, SIGNAL (clicked()), this, SLOT (insertSpecialChar02()));
+    connect(ui->x03, SIGNAL (clicked()), this, SLOT (insertSpecialChar03()));
+    connect(ui->x04, SIGNAL (clicked()), this, SLOT (insertSpecialChar04()));
+    connect(ui->x09, SIGNAL (clicked()), this, SLOT (insertSpecialChar09()));
+    connect(ui->x0A, SIGNAL (clicked()), this, SLOT (insertSpecialChar0A()));
+    connect(ui->x0D, SIGNAL (clicked()), this, SLOT (insertSpecialChar0D()));
+    connect(ui->x11, SIGNAL (clicked()), this, SLOT (insertSpecialChar11()));
+    connect(ui->x12, SIGNAL (clicked()), this, SLOT (insertSpecialChar12()));
+    connect(ui->x13, SIGNAL (clicked()), this, SLOT (insertSpecialChar13()));
+    connect(ui->x14, SIGNAL (clicked()), this, SLOT (insertSpecialChar14()));
+    connect(ui->x1C, SIGNAL (clicked()), this, SLOT (insertSpecialChar1C()));
+    connect(ui->x1D, SIGNAL (clicked()), this, SLOT (insertSpecialChar1D()));
+    connect(ui->x1E, SIGNAL (clicked()), this, SLOT (insertSpecialChar1E()));
+    connect(ui->x1F, SIGNAL (clicked()), this, SLOT (insertSpecialChar1F()));
 
     fillPortsInfo();
     fillPortsParameters();
@@ -220,7 +204,7 @@ void MainWindow::readData()
 
 void MainWindow::handleError(QSerialPort::SerialPortError error)
 {
-    if (error == QSerialPort::ResourceError) {
+    if (error != QSerialPort::NoError) {
         QMessageBox::critical(this, tr("Critical Error"), serial->errorString());
         closeSerialPort();
     }
@@ -244,29 +228,13 @@ void MainWindow::insertSpecialChar01(){ui->input->insert(QChar(0x2401));}
 void MainWindow::insertSpecialChar02(){ui->input->insert(QChar(0x2402));}
 void MainWindow::insertSpecialChar03(){ui->input->insert(QChar(0x2403));}
 void MainWindow::insertSpecialChar04(){ui->input->insert(QChar(0x2404));}
-void MainWindow::insertSpecialChar05(){ui->input->insert(QChar(0x2405));}
-void MainWindow::insertSpecialChar06(){ui->input->insert(QChar(0x2406));}
-void MainWindow::insertSpecialChar07(){ui->input->insert(QChar(0x2407));}
-void MainWindow::insertSpecialChar08(){ui->input->insert(QChar(0x2408));}
 void MainWindow::insertSpecialChar09(){ui->input->insert(QChar(0x2409));}
 void MainWindow::insertSpecialChar0A(){ui->input->insert(QChar(0x240A));}
-void MainWindow::insertSpecialChar0B(){ui->input->insert(QChar(0x240B));}
-void MainWindow::insertSpecialChar0C(){ui->input->insert(QChar(0x240C));}
 void MainWindow::insertSpecialChar0D(){ui->input->insert(QChar(0x240D));}
-void MainWindow::insertSpecialChar0E(){ui->input->insert(QChar(0x240E));}
-void MainWindow::insertSpecialChar0F(){ui->input->insert(QChar(0x240F));}
-void MainWindow::insertSpecialChar10(){ui->input->insert(QChar(0x2410));}
 void MainWindow::insertSpecialChar11(){ui->input->insert(QChar(0x2411));}
 void MainWindow::insertSpecialChar12(){ui->input->insert(QChar(0x2412));}
 void MainWindow::insertSpecialChar13(){ui->input->insert(QChar(0x2413));}
 void MainWindow::insertSpecialChar14(){ui->input->insert(QChar(0x2414));}
-void MainWindow::insertSpecialChar15(){ui->input->insert(QChar(0x2415));}
-void MainWindow::insertSpecialChar16(){ui->input->insert(QChar(0x2416));}
-void MainWindow::insertSpecialChar17(){ui->input->insert(QChar(0x2417));}
-void MainWindow::insertSpecialChar18(){ui->input->insert(QChar(0x2418));}
-void MainWindow::insertSpecialChar19(){ui->input->insert(QChar(0x2419));}
-void MainWindow::insertSpecialChar1A(){ui->input->insert(QChar(0x241A));}
-void MainWindow::insertSpecialChar1B(){ui->input->insert(QChar(0x241B));}
 void MainWindow::insertSpecialChar1C(){ui->input->insert(QChar(0x241C));}
 void MainWindow::insertSpecialChar1D(){ui->input->insert(QChar(0x241D));}
 void MainWindow::insertSpecialChar1E(){ui->input->insert(QChar(0x241E));}
